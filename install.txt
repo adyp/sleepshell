@@ -1,0 +1,120 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
+
+Sleep Dummy Shell (SleepShell).
+Copyright ©2004,2005 by Mario A. Valdez-Ramirez
+(mario@mariovaldez.org). 
+(Read the license.txt file for details).
+
+
+
+=========================================
+* Requirements of the Sleep Dummy Shell.
+
+* A C compiler (tested with GCC).
+* Linux or Unix as platform (tested with Linux and FreeBSD) or
+Windows with Cygwin.
+
+
+=========================================
+* Installation of the Sleep Dummy Shell.
+
+
+1) Get the files.
+Get the files from http://www.mariovaldez.net/software/sleepshell/ 
+
+
+2) Unpack.
+Unpack the files in a directory with
+
+tar tvzf sleepshell_0.0.2.tar.gz
+
+to create a directory "sleepshell".
+
+
+3) Compile.
+Change to that directory and run "make".
+(If you are using Windows with CygWin, copy the Makefile.cygwin file
+over the Makefile).
+You will see a message like this:
+
+gcc -O2 -g sleepshell.c -o sleepshell
+strip sleepshell
+
+After this, a new executable file named "sleepshell" should be in the
+directory.
+
+
+4) Test.
+Run the ./sleepshell and you should get the following text if you are
+using SSH (one asterisk per 10-seconds):
+
+Connection: 192.168.0.25 2640 192.168.0.1 22
+Client: 192.168.0.25 2640 22
+Terminal: /dev/pts/1
+
+*****
+
+Or just (one asterisk per 10-seconds):
+
+***
+
+
+5) Install.
+Break the sleepshell execution with Ctrl-C, then run "make install"
+to copy the executable file to /usr/local/bin/. You must be "root" to
+do this. You should get the following text:
+
+cp sleepshell /usr/local/bin/sleepshell
+
+
+6) Set as login shell.
+Set the login shell of the tunnel user(s) with the usermod command.
+For example, to set the login shell of the user "remoteuser" you
+would use:
+
+usermod -s /usr/local/bin/sleepshell remoteuser
+
+If you want to do it manually, open the /etc/passwd file and change
+the seventh field (the shell field) to /usr/local/bin/sleepshell. For
+example, to set the login shell of the user "remoteuser" you would
+edit its /etc/passwd record from:
+
+x:1022:100:,,,:/home/remoteuser:/bin/bash
+
+to
+
+x:1022:100:,,,:/home/remoteuser:/usr/local/bin/sleepshell
+
+
+(This is just an example!)
+
+
+7) Test the SSH account.
+Connect with SSH to the server and login to the SSH account with the
+sleepshell. You should get a message like the following (one asterisk
+per 10-seconds):
+
+Connection: 192.168.0.25 4567 192.168.0.1 22
+Client: 192.168.0.25 4567 22
+Terminal: /dev/pts/4
+
+****
+
+Break the execution with Ctrl-C or by sending a SIGTERM signal to the
+sleepshell process. The SSH will be closed.
+
+
+8) You are done.
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: PGP 8.0
+
+iQCVAwUBQ4+uQzpHuYe8JiHtAQF6gQQA1x4wM+7IGnjmLvAtfU3Wnl11htv1PpPQ
+Vc8w/bHITZji9Xn1HGpw6rZ5ZF65w7lU4k4a7vewDpy74EFKsm+qKyUeTp1vHSji
+22H34oGShvDNu46ztxjbHCP9ue9vjtlPhBi59rHEWHO3OV7VOYHB0oNa0sXAKRsB
+8iUBeGFiGvc=
+=jaC/
+-----END PGP SIGNATURE-----

@@ -1,0 +1,11 @@
+
+
+sleepshell: sleepshell.c
+	gcc -O2 -g sleepshell.c -o sleepshell.exe
+	strip sleepshell.exe
+
+install: 
+	cp sleepshell.exe /usr/local/bin/sleepshell.exe
+
+clean:
+	rm -f sleepshell.exe

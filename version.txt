@@ -1,0 +1,44 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
+
+Sleep Dummy Shell (SleepShell).
+Copyright ©2004,2005 by Mario A. Valdez-Ramirez
+(mario@mariovaldez.org). 
+(Read the license.txt file for details).
+
+
+This is version 0.0.1.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Summary of this release (0.0.2):
+
+* Makefile to compile under CygWin.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+0.0.2, 2005/12/01:
+
+Added Makefile.cygwin file to compile under CygWin.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+0.0.1, 2004/08/10:
+
+Initial release.
+
+
+
+
+
+
+-----BEGIN PGP SIGNATURE-----
+Version: PGP 8.0
+
+iQCVAwUBQ4+tATpHuYe8JiHtAQG9BAP/SIQwpb0QPlqm4CVY/wprS/HOWy79NiNz
+0OtF4jmSem7BQGQK0iCOkv+9MbHX6tLzg8CjTk1jL1lHEvBx6iX8Nk+s7vG7YkZJ
+maNcEQV/ApTxXVEKLI3s8XXTp1fcScrQ7sN5D4v0iCQNyyENoYjuMEdzK+KtOkyc
+kh9HTBwFpqk=
+=JE3F
+-----END PGP SIGNATURE-----
