@@ -1,3 +1,6 @@
+# Output file
+sleepshell
+
 # Object files
 *.o
 *.ko

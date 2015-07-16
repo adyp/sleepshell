@@ -32,7 +32,7 @@ Olmos 809, San Nicolas, NL. 66495, Mexico.
 #define TICKER_LEN 4
 static const char ticker_chars[TICKER_LEN]="|/-\\";
 
-main() {
+int main() {
   char *ssh_connection;
   char *ssh_client;
   char *ssh_tty;
@@ -52,5 +52,7 @@ main() {
     i = (i + 1) % TICKER_LEN;
     fflush (NULL);
   }
+
+  return 0;	/* should never be reached */
 }
 

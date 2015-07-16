@@ -1,7 +1,8 @@
 
+CC?=cc
 
 sleepshell: sleepshell.c
-	gcc -O2 -g sleepshell.c -o sleepshell
+	$(CC) -O2 -g sleepshell.c -o sleepshell
 	strip sleepshell
 
 install: 
