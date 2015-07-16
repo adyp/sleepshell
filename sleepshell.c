@@ -29,10 +29,14 @@ Olmos 809, San Nicolas, NL. 66495, Mexico.
 
 #define SS_SLEEPTIME 10
 
+#define TICKER_LEN 4
+static const char ticker_chars[TICKER_LEN]="|/-\\";
+
 main() {
   char *ssh_connection;
   char *ssh_client;
   char *ssh_tty;
+  int i;
   
   ssh_connection = getenv ("SSH_CONNECTION");
   ssh_client = getenv ("SSH_CLIENT");
@@ -41,9 +45,11 @@ main() {
   if (ssh_connection && ssh_client) {
     printf ("Connection: %s\nClient: %s\nTerminal: %s\n\n", ssh_connection, ssh_client, ssh_tty);
   }
+  i=0;
   while (1) {
     sleep (SS_SLEEPTIME);
-    printf ("*");
+    printf ("%c\r", ticker_chars[i]);
+    i = (i + 1) % TICKER_LEN;
     fflush (NULL);
   }
 }
