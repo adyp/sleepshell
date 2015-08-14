@@ -36,7 +36,7 @@ int main() {
   char *ssh_connection;
   char *ssh_client;
   char *ssh_tty;
-  int i;
+  unsigned long int i;
   
   ssh_connection = getenv ("SSH_CONNECTION");
   ssh_client = getenv ("SSH_CLIENT");
@@ -47,10 +47,10 @@ int main() {
   }
   i=0;
   while (1) {
-    sleep (SS_SLEEPTIME);
-    printf ("%c\r", ticker_chars[i]);
-    i = (i + 1) % TICKER_LEN;
+    printf ("Up for %lusec [%c]\r", i * SS_SLEEPTIME, ticker_chars[i % TICKER_LEN]);
     fflush (NULL);
+    sleep (SS_SLEEPTIME);
+    i++;
   }
 
   return 0;	/* should never be reached */
