@@ -48,12 +48,11 @@ int main() {
     printf ("Connection: %s\nClient: %s\nTerminal: %s\n\n", ssh_connection, ssh_client, ssh_tty);
   }
 
-  i=0;
-  while (1) {
+  // Enter infinite counting loop
+  for (i = 0 ; 1; i++) {
     printf ("\r[%c] Up for %-60s ", ticker_chars[i % TICKER_LEN], seconds2string(i * SS_SLEEPTIME));
     fflush (NULL);
     sleep (SS_SLEEPTIME);
-    i++;
   }
 
   return 0;	/* should never be reached */
@@ -88,6 +87,10 @@ char* seconds2string(unsigned long seconds) {
       ptr += sprintf(ptr, "%lu %s%s", value, units[i], (value > 1 ? "s" : ""));
     }
   }
+
+  /* Avoid returning empty (or previously buffered) string */
+  if ( ptr == buffer )
+    sprintf(ptr, "...");
 
   return buffer;
 }
