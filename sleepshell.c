@@ -32,6 +32,8 @@ Olmos 809, San Nicolas, NL. 66495, Mexico.
 #define TICKER_LEN 4
 static const char ticker_chars[TICKER_LEN]="|/-\\";
 
+char* seconds2string(unsigned long seconds);
+
 int main() {
   char *ssh_connection;
   char *ssh_client;
@@ -48,7 +50,7 @@ int main() {
 
   i=0;
   while (1) {
-    printf ("\rUp for %lusec [%c]", i * SS_SLEEPTIME, ticker_chars[i % TICKER_LEN]);
+    printf ("\rUp for %s [%c]", seconds2string(i * SS_SLEEPTIME), ticker_chars[i % TICKER_LEN]);
     fflush (NULL);
     sleep (SS_SLEEPTIME);
     i++;
@@ -57,3 +59,35 @@ int main() {
   return 0;	/* should never be reached */
 }
 
+/* Adapted from https://rosettacode.org/wiki/Convert_seconds_to_compound_duration#C */
+char* seconds2string(unsigned long seconds) {
+  int i;
+
+  const unsigned long s = 1;
+  const unsigned long m = 60 * s;
+  const unsigned long h = 60 * m;
+  const unsigned long d = 24 * h;
+  const unsigned long w =  7 * d;
+  const unsigned long y = 365* d;
+
+  const unsigned long coeff[6] = { y, w, d, h, m, s };
+  const char units[6][7] = { "year", "week", "day", "hour", "minute", "second" };
+
+  static char buffer[256];
+  char* ptr = buffer;
+
+  for ( i = 0; i < 6; i++ )
+  {
+    unsigned long value;
+    value   = seconds / coeff[i];
+    seconds = seconds % coeff[i];
+    if ( value )
+    {
+      if ( ptr != buffer )
+        ptr += sprintf(ptr, ", ");
+      ptr += sprintf(ptr, "%lu %s%s", value, units[i], (value > 1 ? "s" : ""));
+    }
+  }
+
+  return buffer;
+}
