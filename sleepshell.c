@@ -45,9 +45,10 @@ int main() {
   if (ssh_connection && ssh_client) {
     printf ("Connection: %s\nClient: %s\nTerminal: %s\n\n", ssh_connection, ssh_client, ssh_tty);
   }
+
   i=0;
   while (1) {
-    printf ("Up for %lusec [%c]\r", i * SS_SLEEPTIME, ticker_chars[i % TICKER_LEN]);
+    printf ("\rUp for %lusec [%c]", i * SS_SLEEPTIME, ticker_chars[i % TICKER_LEN]);
     fflush (NULL);
     sleep (SS_SLEEPTIME);
     i++;
