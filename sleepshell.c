@@ -50,7 +50,7 @@ int main() {
 
   i=0;
   while (1) {
-    printf ("\rUp for %s [%c]", seconds2string(i * SS_SLEEPTIME), ticker_chars[i % TICKER_LEN]);
+    printf ("\r[%c] Up for %-60s ", ticker_chars[i % TICKER_LEN], seconds2string(i * SS_SLEEPTIME));
     fflush (NULL);
     sleep (SS_SLEEPTIME);
     i++;
