@@ -2,6 +2,7 @@
 Sleep Dummy Shell (SleepShell).
 Copyright ©2004, 2005 by Mario A. Valdez-Ramirez
 http://www.mariovaldez.net/
+Copyright ©2015, 2020 by Adrian Penisoara
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
