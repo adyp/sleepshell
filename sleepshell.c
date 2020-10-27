@@ -27,13 +27,16 @@ Olmos 809, San Nicolas, NL. 66495, Mexico.
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define SS_SLEEPTIME 10
+#define TIME_FORMAT "%a %d %b %r"
 
 #define TICKER_LEN 4
 static const char ticker_chars[TICKER_LEN]="|/-\\";
 
 char* seconds2string(unsigned long seconds);
+char* get_current_time(void);
 
 int main() {
   char *ssh_connection;
@@ -44,6 +47,7 @@ int main() {
   ssh_connection = getenv ("SSH_CONNECTION");
   ssh_client = getenv ("SSH_CLIENT");
   ssh_tty = getenv ("SSH_TTY");
+
   printf ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
   if (ssh_connection && ssh_client) {
     printf ("Connection: %s\nClient: %s\nTerminal: %s\n\n", ssh_connection, ssh_client, ssh_tty);
@@ -51,7 +55,7 @@ int main() {
 
   // Enter infinite counting loop
   for (i = 0 ; 1; i++) {
-    printf ("\r[%c] Up for %-60s ", ticker_chars[i % TICKER_LEN], seconds2string(i * SS_SLEEPTIME));
+    printf ("\r[%.25s] Up for %-40s (%c)", get_current_time(), seconds2string(i * SS_SLEEPTIME), ticker_chars[i % TICKER_LEN]);
     fflush (NULL);
     sleep (SS_SLEEPTIME);
   }
@@ -94,4 +98,27 @@ char* seconds2string(unsigned long seconds) {
     sprintf(ptr, "...");
 
   return buffer;
+}
+
+/* Adapted from strftime(3) manpage */
+char* get_current_time(void)
+{
+  static char output[128];
+  time_t t;
+  struct tm *ltime;
+
+  t = time(NULL);
+  ltime = localtime(&t);
+  if ( ltime == NULL ) {
+    sprintf(output, "ERR: localtime(3)");
+    return output;
+  }
+
+  if ( strftime(output, sizeof(output), TIME_FORMAT, ltime) == 0 ) {
+    sprintf(output, "ERR: strfime(3)");
+    return output;
+  }
+
+  /* Current time properly formatted in buffer */
+  return output;
 }
