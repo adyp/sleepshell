@@ -30,7 +30,8 @@ Olmos 809, San Nicolas, NL. 66495, Mexico.
 #include <time.h>
 
 #define SS_SLEEPTIME 10
-#define TIME_FORMAT "%a %d %b %r"
+#define TIME_FORMAT "%a %d %b %r %Z%z"
+#define TIME_MAXLEN 35
 
 #define TICKER_LEN 4
 static const char ticker_chars[TICKER_LEN]="|/-\\";
@@ -55,7 +56,7 @@ int main() {
 
   // Enter infinite counting loop
   for (i = 0 ; 1; i++) {
-    printf ("\r[%.25s] Up for %-40s (%c)", get_current_time(), seconds2string(i * SS_SLEEPTIME), ticker_chars[i % TICKER_LEN]);
+    printf ("\r[%.*s] Up for %-40s (%c)", TIME_MAXLEN, get_current_time(), seconds2string(i * SS_SLEEPTIME), ticker_chars[i % TICKER_LEN]);
     fflush (NULL);
     sleep (SS_SLEEPTIME);
   }
